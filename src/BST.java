@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class BST<E extends Comparable<E>>
 {
@@ -6,6 +9,41 @@ public class BST<E extends Comparable<E>>
 	private Node<E> rootNode;
 	
 	// --- Public Methods
+	
+	// BST Set 3
+	
+	public List<E> getInOrderTraversal() {
+		if(rootNode == null)
+			return null;
+		else
+		{	
+			List<E> list = new ArrayList<E>();
+			inOrderTraversal(rootNode, list);
+			return list;
+		}
+	}
+	
+	public List<E> getPreOrderTraversal() {
+		if(rootNode == null)
+			return null;
+		else
+		{	
+			List<E> list = new ArrayList<E>();
+			preOrderTraversal(rootNode, list);
+			return list;
+		}
+	}
+	
+	public List<E> getPostOrderTraversal() {
+		if(rootNode == null)
+			return null;
+		else
+		{	
+			List<E> list = new ArrayList<E>();
+			postOrderTraversal(rootNode, list);
+			return list;
+		}
+	}
 	
 	// BST Set 1
 	
@@ -54,6 +92,50 @@ public class BST<E extends Comparable<E>>
 	}
 	
 	// --- Private Methods
+	private void postOrderTraversal(Node<E> c, List<E> listIn)
+	{
+		if( c != null)
+		{						
+			//Left
+			postOrderTraversal(c.getLeftChild(), listIn);
+
+			//Right
+			postOrderTraversal(c.getRightChild(), listIn);
+			
+			//Data
+			listIn.add(c.getValue());
+		}
+	}
+	
+	private void preOrderTraversal(Node<E> c, List<E> listIn)
+	{
+		if( c != null)
+		{			
+			//Data
+			listIn.add(c.getValue());
+			
+			//Left
+			preOrderTraversal(c.getLeftChild(), listIn);
+
+			//Right
+			preOrderTraversal(c.getRightChild(), listIn);
+		}
+	}
+	
+	private void inOrderTraversal(Node<E> c, List<E> listIn)
+	{
+		if( c != null)
+		{
+			//Left
+			inOrderTraversal(c.getLeftChild(), listIn);
+			
+			//Data
+			listIn.add(c.getValue());
+
+			//Right
+			inOrderTraversal(c.getRightChild(), listIn);
+		}
+	}
 	
 	private Node<E> recursiveLCA(Node<E> node, E value1, E value2) {
 		// This node is value1 or value2, must be the LCA
@@ -203,6 +285,8 @@ public class BST<E extends Comparable<E>>
 		}
 		return result;
 	}
+	
+	// Misc
 	
 	public String printTree() {
 		if(rootNode == null)
