@@ -7,6 +7,8 @@ public class BST<E extends Comparable<E>>
 	
 	// --- Public Methods
 	
+	// BST Set 1
+	
 	public E getMax() {
 		if(rootNode == null)
 			return null;
@@ -20,6 +22,17 @@ public class BST<E extends Comparable<E>>
 		else
 			return recursiveGetMin(rootNode);
 	}
+	
+	public Node<E> findLeastCommonAncestor(Node<E> node1, Node<E> node2) {
+		if(rootNode == null)
+			return null;
+		else if(!this.contains(node1.getValue()) || !this.contains(node2.getValue()))
+			return null;
+		else
+			return recursiveLCA(rootNode, node1.getValue(), node2.getValue());
+	}
+	
+	// BST Set 0
 
 	public void add(E valueIn){
 		if(rootNode == null)
@@ -41,6 +54,38 @@ public class BST<E extends Comparable<E>>
 	}
 	
 	// --- Private Methods
+	
+	private Node<E> recursiveLCA(Node<E> node, E value1, E value2) {
+		// This node is value1 or value2, must be the LCA
+		if(	node.getValue() == value1 || 
+			node.getValue() == value2 )
+			return node;
+		// This node is between value1 and value2, must be the LCA
+		else if(value1.compareTo(node.getValue()) < 0 &&
+				value2.compareTo(node.getValue()) > 0)
+			return node;
+		// This node is between value2 and value1, must be the LCA
+		else if(value1.compareTo(node.getValue()) > 0 &&
+				value2.compareTo(node.getValue()) < 0)
+			return node;
+		// Both are smaller, LCA must be down to the left farther
+		else if(value1.compareTo(node.getValue()) < 0 &&
+				value2.compareTo(node.getValue()) < 0) 
+		{
+			if(node.getLeftChild() == null)
+				return null;
+			else
+				return recursiveLCA(node.getLeftChild(), value1, value2);
+		}
+		// Both are bigger, LCA must be down to the right farther
+		else
+		{
+			if(node.getRightChild() == null)
+				return null;
+			else
+				return recursiveLCA(node.getRightChild(), value1, value2);
+		}
+	}
 	
 	private E recursiveGetMax(Node<E> node){
 		if(node.getRightChild() == null)

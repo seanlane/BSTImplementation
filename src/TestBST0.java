@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TestBST {
+public class TestBST0 {
 
 	public BST<Integer> myTree;
 	
