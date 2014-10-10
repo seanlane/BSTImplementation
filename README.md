@@ -1,4 +1,4 @@
 BSTImplementation
 =================
 
-For a class project, implemented a Binary Search Tree in Java. Nothing too special to see here.
+For a class project, implemented a Binary Search Tree in Java. Not very much to see here.
