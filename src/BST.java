@@ -98,7 +98,7 @@ public class BST<E extends Comparable<E>>
 		if(node.getLeftChild() == null)
 			return node.getValue();
 		else
-			return recursiveGetMax(node.getLeftChild());
+			return recursiveGetMin(node.getLeftChild());
 	}
 	
 	private Node<E> recursiveRemove(Node<E> toDelete, E value) {
